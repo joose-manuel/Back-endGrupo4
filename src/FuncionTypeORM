@@ -4,14 +4,14 @@ Funcionamientos Del typeorm
 
 1.Primero toca descargar todas las dependencias
 
-2.Toca creear las las capas para de separacion las principales.
+2.Toca creear las las capas para de separacion, las principales.
 
     1.Entidad
         La entidad de es relacionada con la base de datos, tal cual se crea la enteidad se crea en la base datos
         para para pasar codigo ts A codigo de base de datos.
 
     2.Repositorio
-        El Repositorio es el cual se conecta con la entidad y le da los poderes y acceso alos datos de la base de datos
+        El Repositorio es el cual se conecta con la entidad y le da los poderes y acceso a los datos de la base de datos
         mas facil, ejemplo puedes crear metodos para agregar, eliminar, editar y puedes hacer fitros etc.
     
     3.Controlador
