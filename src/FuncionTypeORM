@@ -1,0 +1,27 @@
+
+
+Funcionamientos Del typeorm
+
+1.Primero toca descargar todas las dependencias
+
+2.Toca creear las las capas para de separacion las principales.
+
+    1.Entidad
+        La entidad de es relacionada con la base de datos, tal cual se crea la enteidad se crea en la base datos
+        para para pasar codigo ts A codigo de base de datos.
+
+    2.Repositorio
+        El Repositorio es el cual se conecta con la entidad y le da los poderes y acceso alos datos de la base de datos
+        mas facil, ejemplo puedes crear metodos para agregar, eliminar, editar y puedes hacer fitros etc.
+    
+    3.Controlador
+        El controlador el que se conecta con esos metodos de repositorio y crear la api el puente para la connecion
+        con los metodos y la base datos pero la url no esta definida
+    
+    4. Router
+        El router utilza los metodos del controlador y le agrega la ruta de la api, para hacerla publica
+3. Conexion ala base de datos
+    Toca crear un archivo ts se va a encargar de la conexion a la base de datos que tendra todos los datos para la conexion,
+    Ejemplo:Clave, Nombre, User etc.
+
+    A demas tendra las entidades conectadas con sus respectivas importaciones.

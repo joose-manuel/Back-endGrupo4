@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+
+# Build output
+dist/
+build/
+
+# IDE settings
+.vscode/
+.idea/
+.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
+.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
