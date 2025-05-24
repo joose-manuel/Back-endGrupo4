@@ -1,6 +1,6 @@
 // src/Repository/Usuario/RepositoryUser.ts
-import { AppDataSource } from "../../../Db-conection"; // Ruta relativa correcta
-import { User } from "../../../Entity/Usuario/Usuario/EntidadUser"; // Ruta relativa correcta
+import { AppDataSource } from "../../Db-conection"; // Ruta relativa correcta
+import { User } from "../../Entity/Usuario/EntidadUser"; // Ruta relativa corregida
 
 const userRepository = AppDataSource.getRepository(User);
 

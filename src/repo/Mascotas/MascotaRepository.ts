@@ -1,4 +1,4 @@
-import { Mascota } from '../../Entity/mascota/EntidadMascota';
+import { Mascota } from '../../Entity/mascotas/EntidadMascota';
 import { AppDataSource } from "../../Db-conection"; // Ruta relativa correcta
 
 const mascotaRepository = AppDataSource.getRepository(Mascota);

@@ -1,6 +1,6 @@
 // src/controllers/Login/ControladorLogin.ts
 import { Request, Response } from 'express';
-import { UserRepository } from '../../repo/Masota/Usuario/RepositoryUser';
+import { UserRepository } from '../../repo/Usuario/RepositoryUser';
 import { User } from '../../Entity/Usuario/Usuario/EntidadUser';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';

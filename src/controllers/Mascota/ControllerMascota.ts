@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { MascotaRepository } from "../../repo/Masota/MascotaRepository"; // Asegúrate de que esta importación sea correcta y apunte al único RepositoryMascota.ts
+import { MascotaRepository } from "../../repo/Mascotas/MascotaRepository"; // Asegúrate de que esta importación sea correcta y apunte al único RepositoryMascota.ts
 
 export const MascotaController = {
     getAll: async (_req: Request, res: Response) => {

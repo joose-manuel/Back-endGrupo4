@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import bcrypt from 'bcryptjs';
-import { Mascota } from "../../mascota/EntidadMascota";
+import { Mascota } from "../mascota/EntidadMascota";
 
 @Entity("user")
 export class User {

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 // Asegúrate de que esta importación sea correcta y apunte al único RepositoryUser.ts
-import { UserRepository } from "../repo/Masota/Usuario/RepositoryUser"; 
+import { UserRepository } from "../repo/Usuario/RepositoryUser"; 
 
 export const UserController = {
     getAll: async (_req: Request, res: Response) => {
