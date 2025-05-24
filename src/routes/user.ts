@@ -1,8 +1,8 @@
-import { ControladorEspecie } from './../controllers/especies/ControladorEspecie';
+import { ControladorEspecie } from '../controllers/especies/ControladorEspecie';
 import { Router } from "express";
 import { UserController } from "../controllers/UserController";
 import { login, register } from '../controllers/Login/ControladorLogin';
-import { Mascota } from "../Entity/mascotas/EntidadMascota";
+
 import { MascotaController } from "../controllers/Mascota/ControllerMascota";
 
 

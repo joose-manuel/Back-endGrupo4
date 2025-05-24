@@ -1,9 +1,11 @@
 // src/controllers/Login/ControladorLogin.ts
 import { Request, Response } from 'express';
 import { UserRepository } from '../../repo/Usuario/RepositoryUser';
-import { User } from '../../Entity/Usuario/Usuario/EntidadUser';
+import { User } from "../../Entity/Usuario/EntidadUser";
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import EmailController from '../../Helpers/gemail';
+
 
 dotenv.config();
 
@@ -11,7 +13,6 @@ const JWT_SECRET = process.env.JWT_SECRET || 'tu_secreto_JWT_fuerte_aqui';
 
 // Registro de usuario
 export const register = async (req: Request, res: Response) => {
-    // AHORA EXTRAEMOS TODOS LOS CAMPOS NECESARIOS
     const { correo, contraseña, nombre, fechaDeNacimiento } = req.body;
 
     if (!correo || !contraseña) {
@@ -27,23 +28,47 @@ export const register = async (req: Request, res: Response) => {
         const newUser = new User();
         newUser.correo = correo;
         newUser.contraseña = contraseña;
-        newUser.nombre = nombre; // <--- AÑADIDO: Asignar el nombre
-        newUser.fechaDeNacimiento = fechaDeNacimiento; // <--- AÑADIDO: Asignar la fecha de nacimiento
-        // rol y estado tienen valores por defecto en la entidad, no necesitas asignarlos aquí a menos que quieras cambiarlos
-        // newUser.rol = 'user'; // Ya es el default
-        // newUser.estado = true; // Ya es el default
+        newUser.nombre = nombre;
+        newUser.fechaDeNacimiento = fechaDeNacimiento;
 
         await newUser.hashPassword(); // Hashear la contraseña
 
         const savedUser = await UserRepository.create(newUser); // Guardar el nuevo usuario
 
-        // Opcional: No devolver la contraseña en la respuesta
-        const { contraseña: _, ...userWithoutPassword } = savedUser;
+        // Enviar correo de bienvenida
+        try {
+            const mailController = new EmailController();
+            await mailController.sendEmail(
+                correo, // Correo del usuario registrado
+                'Bienvenido a nuestra plataforma',
+                `Hola ${nombre}, gracias por registrarte en nuestra plataforma.`
+            );
+        } catch (error) {
+            console.error('Error sending welcome email:', error);
+        }
 
-        return res.status(201).json({ message: 'User registered successfully!', user: userWithoutPassword });
-    } catch (error: any) { // Usamos 'any' aquí para acceder a 'error.message'
+        // Generar token JWT
+        const token = jwt.sign(
+            {
+                id: savedUser.id,
+                correo: savedUser.correo,
+                rol: savedUser.rol,
+                nombre: savedUser.nombre,
+            },
+            JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
+        // Responder con el token y los datos del usuario
+        const { contraseña: _, ...userWithoutPassword } = savedUser;
+        return res.status(201).json({
+            message: 'User registered successfully!',
+            token,
+            user: userWithoutPassword,
+        });
+
+    } catch (error: any) {
         console.error('Error registering user:', error);
-        // Mejorar el mensaje de error para depuración
         return res.status(500).json({ message: 'Error registering user', details: error.message || 'Unknown error' });
     }
 };
@@ -70,12 +95,40 @@ export const login = async (req: Request, res: Response) => {
         }
 
         const token = jwt.sign(
-            { id: user.id, username: user.correo, role: user.rol },
+            { 
+                id: user.id, 
+                username: user.correo, 
+                rol: user.rol,
+                nombre: user.nombre,
+                correo: user.correo // Aseguramos que el correo también esté en el token
+            },
             JWT_SECRET,
             { expiresIn: '1h' }
         );
 
-        return res.status(200).json({ message: 'Login successful', token });
+        // Enviar correo de notificación de login
+        try {
+            const mailController = new EmailController();
+            await mailController.sendEmail(
+                correo, // Correo del usuario
+                'Inicio de sesión exitoso',
+                `Hola ${user.nombre}, has iniciado sesión en nuestra plataforma.`
+            );
+        } catch (error) {
+            console.error('Error sending login notification email:', error);
+        }
+
+        return res.status(200).json({ 
+            message: 'Login successful', 
+            token,
+            user: {
+                id: user.id,
+                correo: user.correo,
+                rol: user.rol,
+                nombre: user.nombre // Agregar el nombre del usuario
+            }
+        });
+
     } catch (error: any) {
         console.error('Error logging in user:', error);
         return res.status(500).json({ message: 'Error logging in', details: error.message || 'Unknown error' });

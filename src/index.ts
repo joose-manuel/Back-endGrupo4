@@ -3,10 +3,13 @@ import rutas from './routes/user';
 import { AppDataSource } from './Db-conection';
 import dotenv from 'dotenv';
 import mainRouter from './routes/user';
-import { User } from './Entity/Usuario/Usuario/EntidadUser';
+
+import cors from 'cors';
 dotenv.config();
 const app = express();
 app.use(express.json());
+
+app.use(cors()); 
 
 const PORT = 3000;
 

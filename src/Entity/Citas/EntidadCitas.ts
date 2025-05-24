@@ -11,7 +11,7 @@ export class Citas {
     @Column("date") 
     citaFecha: Date | undefined;
 
-    @Column("")
+    @Column("text")
     citaHora:  | undefined;
 
     @Column({ type: "boolean", default: true })

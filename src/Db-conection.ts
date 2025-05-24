@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { User } from "./Entity/Usuario/Usuario/EntidadUser";
+import { User } from './Entity/Usuario/EntidadUser';
 import { Mascota } from "./Entity/mascotas/EntidadMascota";
 import { Especies } from "./Entity/especies/EntidadEspecie";
 import { Veterinarios } from "./Entity/veterinario/EntidadVeterinario";
@@ -10,11 +10,12 @@ export const AppDataSource = new DataSource({
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "123456789",
+    password: "a1234",
     database: "verterinaria2",
-    synchronize: true,
+    synchronize: false,
     logging: true,
     entities: [User, Mascota,Especies,Veterinarios,Citas,Roles],
     subscribers: [],
     migrations: [],
+    //ymjk xlpe eidf euke
 })
