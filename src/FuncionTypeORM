@@ -25,3 +25,8 @@ Funcionamientos Del typeorm
     Ejemplo:Clave, Nombre, User etc.
 
     A demas tendra las entidades conectadas con sus respectivas importaciones.
+
+
+
+
+    Comando: npm install mysql2

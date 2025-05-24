@@ -1,6 +1,10 @@
+import { ControladorEspecie } from './../controllers/especies/ControladorEspecie';
 import { Router } from "express";
 import { UserController } from "../controllers/UserController";
 import { login, register } from '../controllers/Login/ControladorLogin';
+import { Mascota } from "../Entity/mascota/EntidadMascota";
+import { MascotaController } from "../controllers/Mascota/ControllerMascota";
+
 
 const router = Router();
 
@@ -18,5 +22,12 @@ function tryCatch(handler: any) {
 router.get("/usuarios", UserController.getAll);
 router.post("/register", tryCatch(register));
 router.post("/login", tryCatch(login));
+
+router.get("/especies",ControladorEspecie.getAll)
+router.post("/especies", tryCatch(ControladorEspecie.create));
+
+
+router.get("/mascotas",MascotaController.getAll);
+router.post("/mascotas", tryCatch(MascotaController.create));
 
 export default router;

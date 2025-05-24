@@ -3,7 +3,7 @@ import rutas from './routes/user';
 import { AppDataSource } from './Db-conection';
 import dotenv from 'dotenv';
 import mainRouter from './routes/user';
-import { User } from './Entity/Usuario/EntidadUser';
+import { User } from './Entity/Usuario/Usuario/EntidadUser';
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -28,6 +28,7 @@ app.get('/', (_req, res) => {
     console.log("Sone pinged here!!nn!")
     res.send("ponbbg")
 });
+
 app.use('/api', mainRouter); 
 
 app.use('/api/user', rutas);

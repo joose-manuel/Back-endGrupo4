@@ -1,15 +1,17 @@
 import { DataSource } from "typeorm";
-import { User } from "./Entity/Usuario/EntidadUser";
+import { User } from "./Entity/Usuario/Usuario/EntidadUser";
+import { Mascota } from "./Entity/mascota/EntidadMascota";
+import { Especies } from "./Entity/especies/EntidadEspecie";
 export const AppDataSource = new DataSource({
-    type: "postgres",
+    type: "mysql",
     host: "localhost",
-    port: 6543,
-    username: "dbadmin",
-    password: "password",
+    port: 3306,
+    username: "root",
+    password: "a1234",
     database: "verterinaria2",
     synchronize: true,
     logging: true,
-    entities: [User],
+    entities: [User, Mascota,Especies],
     subscribers: [],
     migrations: [],
 })
